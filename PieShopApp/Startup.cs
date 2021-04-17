@@ -29,6 +29,9 @@ namespace PieShopApp
             services.AddScoped<IPieRepository , PieRepository>();
             services.AddScoped<ICategoryRepository , CategoryRepository>();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +50,7 @@ namespace PieShopApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -55,7 +59,7 @@ namespace PieShopApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Pie}/{action=List}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id:int?}");
             });
         }
     }
