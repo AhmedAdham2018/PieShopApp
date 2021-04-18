@@ -4,10 +4,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="~/css/site.css">
-    
+
 </head>
 <body>
     <div class="container">
@@ -25,10 +27,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        
+
                         @await Component.InvokeAsync("CategoryMenu")
-                        @await Component.InvokeAsync("ShoppingCartSummary")
                         <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+
+                        <partial name="_LoginPartial" />
 
                     </ul>
                 </div>
@@ -38,15 +42,14 @@
         <div class="row">
             <div class="col-md-3">
                 <p class="lead">
-                    <img class="img-responsive" alt="Bethany's Pie Shop'" src="~/Images/bethanylogo.png" />
+                    <img class="img-responsive" alt="Pie Shop App'" src="~/Images/bethanylogo.png" />
                 </p>
             </div>
             <div class="col-md-9">
                 @RenderBody()
             </div>
         </div>
+        @RenderSection("Scripts", required: false)
     </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 </body>
 </html>
